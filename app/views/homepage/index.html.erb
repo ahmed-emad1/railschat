@@ -1,0 +1,42 @@
+<% if current_user %>
+<nav class="navbar navbar-light bg-light ">
+  <span class="navbar-brand mb-0 h1"><%= current_user.username %></span>
+  <button type="button" class="btn btn-danger active"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>	
+</button>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <table class="table mt-4 ">
+  <thead>
+    <tr>
+      <th scope="col">Online Users</th>
+      <th scope="col">status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <% @online_users.each do |user| %>
+      <th scope="row"><%= user.email %></th>
+      <td><span class="badge badge-success">Online</span></td>
+    <% end %>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+<div id="msg">
+</div>
+
+<%= form_for Message.new, remote: true do |f| %>
+	<%= f.text_field :content %>
+	<%= f.submit %>
+<% end %>
+
+<%else %>
+<button type="button" class="btn btn-light active"><%= link_to "Sign Up", new_user_registration_path %></button>
+<button type="button" class="btn btn-light active"><%= link_to "Sign in", new_user_session_path %></button>
+<%end%>
+
