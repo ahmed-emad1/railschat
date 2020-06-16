@@ -18,5 +18,5 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 $(document).on('turbolinks:load',function(){
-	console.log('ehna gowa')
+	console.log('connected ....')
 })
